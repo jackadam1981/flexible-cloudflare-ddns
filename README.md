@@ -64,7 +64,7 @@ static：是否本机获取IP地址，如果false，将从网络获取本机访�
 
 nic_name：网卡名称，如果本机获取IP地址，将获取该网卡的IP地址，方便多网络环境的主机注册正确的IP地址。static如果为false，可以留空。
 
-## 特性：
+# 特性：
 
 仅从cloudflare获取一次zone_id，会覆写cfconf.json保存。
 
@@ -91,7 +91,7 @@ nic_name：网卡名称，如果本机获取IP地址，将获取该网卡的IP�
 ```
 
 
-## 计划
+# 计划
 
 兼容wget，似乎openwrt的wget 不支持--header，无法设置请求头，等待openwrt升级。
 
@@ -106,3 +106,58 @@ nic_name：网卡名称，如果本机获取IP地址，将获取该网卡的IP�
 一键安装功能  “curl -s https://***** | bash *** ”
 
 向导功能，交互式生成适配的配置文件。
+
+
+# 一个离谱（完整）的配置文件
+
+```
+{
+  "config": [
+    {
+      "domain_name": "domain_name1",
+      "zone_id": "",
+      "auth_type": "key",
+      "auth_key": "****************************************",
+      "records": [
+        {
+          "name": "host_name1",
+          "type": "AAAA",
+          "proxy": false,
+          "static": true,
+          "nic_name": "eth0"
+        },
+        {
+          "name": "host_name2",
+          "type": "A",
+          "proxy": true,
+          "static": false,
+          "nic_name": ""
+        }
+      ]
+    },
+    {
+      "domain_name": "domain_name2",
+      "zone_id": "",
+      "auth_type": "key",
+      "auth_key": "****************************************",
+      "records": [
+        {
+          "name": "host_name3",
+          "type": "AAAA",
+          "proxy": false,
+          "static": true,
+          "nic_name": "eth0"
+        },
+        {
+          "name": "host_name4",
+          "type": "AAAA",
+          "proxy": false,
+          "static": true,
+          "nic_name": "eth0"
+        }
+      ]
+    }
+  ]
+}
+
+```
