@@ -188,7 +188,9 @@ check_config() {
     if [ -f "cfconf.json" ]; then
         jaLog "配置文件存在，开始运行"
     else
-        jaLog "配置文件不存在，请检查"
+        config={\"config\":[{\"domain_name\":\"domain_name1\",\"zone_id\":\"\",\"auth_type\":\"key\",\"auth_key\":\"****************************************\",\"records\":[{\"name\":\"host_name1\",\"type\":\"AAAA\",\"proxy\":false,\"static\":true,\"nic_name\":\"eth0\"},{\"name\":\"host_name2\",\"type\":\"A\",\"proxy\":true,\"static\":false,\"nic_name\":\"\"}]},{\"domain_name\":\"domain_name2\",\"zone_id\":\"\",\"auth_type\":\"key\",\"auth_key\":\"****************************************\",\"records\":[{\"name\":\"host_name3\",\"type\":\"AAAA\",\"proxy\":false,\"static\":true,\"nic_name\":\"eth0\"},{\"name\":\"host_name4\",\"type\":\"AAAA\",\"proxy\":false,\"static\":true,\"nic_name\":\"eth0\"}]}]}
+        echo $config | jq . >test.json
+        jaLog "配置文件不存在，已创建模板，请修改后再执行。"
         exit 1
     fi
 }
